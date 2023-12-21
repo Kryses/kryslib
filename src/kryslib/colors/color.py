@@ -34,6 +34,12 @@ class Color(object):
 
         self.red, self.green, self.blue, self.alpha = self.color
 
+    def __repr__(self):
+        return f"Color({self.color})"
+
+    def __str__(self):
+        return self.as_hex()
+
     def as_hex(self):
         return rgba_to_hex(self.color)
 
@@ -48,6 +54,15 @@ class Color(object):
             clamp(self.alpha, 0, 255),
         )
 
+    def __eq__(self, other):
+        return self.color == other
+
+    def __iter__(self):
+        return iter(self.color)
+
+    def __add__(self, other):
+        return Color(add_rgba(self.color, other.color))
+
 
 def rgba_to_hex(rgba):
     # Ensure the RGB values are within the 0-255 range
@@ -60,8 +75,6 @@ def rgba_to_hex(rgba):
 def hex_to_rgba(hex):
     hex = hex.lstrip("#")
     hex_type = HexTypes(hex).hex_type
-    ic(hex_type)
-    ic(hex)
 
     if hex_type == HexTypes.DECIMAL_ALPHA:
         hex, alpha = hex.split(".")
@@ -78,7 +91,7 @@ def hex_to_rgba(hex):
 
     hlen = len(hex)
     rgba = tuple(int(hex[i : i + hlen // 3], 16) for i in range(0, hlen, hlen // 3)) + (
-        float(alpha),
+        int(alpha),
     )
     return rgba
 
@@ -92,18 +105,22 @@ def clamp(x, min, max):
 
 
 def add_rgba(color1, color2):
-    return (
-        clamp(color1[0] + color2[0], 0, 255),
-        clamp(color1[1] + color2[1], 0, 255),
-        clamp(color1[2] + color2[2], 0, 255),
-        clamp(color1[3] + color2[3], 0, 255),
+    return Color(
+        (
+            clamp(color1[0] + color2[0], 0, 255),
+            clamp(color1[1] + color2[1], 0, 255),
+            clamp(color1[2] + color2[2], 0, 255),
+            clamp(color1[3] + color2[3], 0, 255),
+        )
     )
 
 
 def muliply_rgba(color1, color2):
-    return (
-        clamp(color1[0] * color2[0], 0, 255),
-        clamp(color1[1] * color2[1], 0, 255),
-        clamp(color1[2] * color2[2], 0, 255),
-        clamp(color1[3] * color2[3], 0, 255),
+    return Color(
+        (
+            clamp(color1[0] * color2[0], 0, 255),
+            clamp(color1[1] * color2[1], 0, 255),
+            clamp(color1[2] * color2[2], 0, 255),
+            clamp(color1[3] * color2[3], 0, 255),
+        )
     )

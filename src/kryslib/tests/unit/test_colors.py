@@ -1,5 +1,6 @@
 import pytest
 from kryslib.colors.color import Color
+from icecream import ic
 
 
 @pytest.mark.unit
@@ -73,3 +74,33 @@ def test_rgba_to_hex():
     assert Color((255, 255, 255, 255)).as_hex() == "#ffffffff"
     assert Color((0, 0, 0, 255)).as_hex() == "#000000ff"
     assert Color((255, 255, 255, 127)).as_hex() == "#ffffff7f"
+
+
+@pytest.mark.unit
+def test_hex_to_rgba():
+    assert Color("#ffffffff").as_rgba() == (255, 255, 255, 255)
+    assert Color("#000000ff").as_rgba() == (0, 0, 0, 255)
+    assert Color("#ffffff7f").as_rgba() == (255, 255, 255, 127)
+
+
+@pytest.mark.unit
+def test_color_as_str():
+    assert str(Color("#ffffff")) == "#ffffffff"
+    assert str(Color("#ffffffff")) == "#ffffffff"
+    assert str(Color("#000000ff")) == "#000000ff"
+    assert str(Color("#ffffff7f")) == "#ffffff7f"
+    assert str(Color((255, 255, 255, 255))) == "#ffffffff"
+    assert str(Color((0, 0, 0, 255))) == "#000000ff"
+    assert str(Color((255, 255, 255, 127))) == "#ffffff7f"
+
+
+@pytest.mark.unit
+def test_color_add():
+    assert Color("#ffffff") + Color("#ffffff") == Color("#ffffff")
+    assert Color((255, 255, 255, 255)) + Color((255, 255, 255, 255)) == Color(
+        (255, 255, 255, 255)
+    )
+    assert Color((0, 0, 0, 255)) + Color((50, 0, 0, 255)) == Color((50, 0, 0, 255))
+    assert Color((0, 0, 0, 255)) + Color((0, 50, 0, 255)) == Color((0, 50, 0, 255))
+    assert Color((0, 0, 0, 255)) + Color((0, 0, 50, 255)) == Color((0, 0, 50, 255))
+    assert Color((0, 0, 0, 0)) + Color((0, 0, 0, 50)) == Color((0, 0, 0, 50))

@@ -34,4 +34,12 @@ pythonPlatform = "Linux"
 pythonpath = [
   "src",
 ] 
+markers = [
+  "unit",
+  "integration",
+  "regression",
+  "performance",
+  "acceptance",
+  "functional",
+]
 addopts = "-ra -q -s"
