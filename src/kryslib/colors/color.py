@@ -1,6 +1,3 @@
-from icecream import ic
-
-
 class HexTypes:
     DECIMAL_ALPHA = "decimal"
     NO_ALPHA = "non-alpha"
@@ -62,6 +59,9 @@ class Color(object):
 
     def __add__(self, other):
         return Color(add_rgba(self.color, other.color))
+
+    def __mul__(self, other):
+        return Color(muliply_rgba(self.color, other.color))
 
 
 def rgba_to_hex(rgba):

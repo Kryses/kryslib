@@ -1,6 +1,5 @@
 import pytest
 from kryslib.colors.color import Color
-from icecream import ic
 
 
 @pytest.mark.unit
@@ -104,3 +103,15 @@ def test_color_add():
     assert Color((0, 0, 0, 255)) + Color((0, 50, 0, 255)) == Color((0, 50, 0, 255))
     assert Color((0, 0, 0, 255)) + Color((0, 0, 50, 255)) == Color((0, 0, 50, 255))
     assert Color((0, 0, 0, 0)) + Color((0, 0, 0, 50)) == Color((0, 0, 0, 50))
+
+
+@pytest.mark.unit
+def test_color_multiply():
+    assert Color("#ffffff") * Color("#ffffff") == Color("#ffffff")
+    assert Color((255, 255, 255, 255)) * Color((255, 255, 255, 255)) == Color(
+        (255, 255, 255, 255)
+    )
+    assert Color((0, 0, 0, 255)) * Color((50, 0, 0, 255)) == Color((0, 0, 0, 255))
+    assert Color((0, 0, 0, 255)) * Color((0, 50, 0, 255)) == Color((0, 0, 0, 255))
+    assert Color((0, 0, 0, 255)) * Color((0, 0, 50, 255)) == Color((0, 0, 0, 255))
+    assert Color((0, 0, 0, 0)) * Color((0, 0, 0, 50)) == Color((0, 0, 0, 0))
