@@ -45,10 +45,10 @@ class Color(object):
 
     def as_clamped_rgba(self):
         return (
-            int(clamp(self.red, 0, 255)),
-            int(clamp(self.green, 0, 255)),
-            int(clamp(self.blue, 0, 255)),
-            int(clamp(self.alpha, 0, 255)),
+            clamp(self.red, 0, 255),
+            clamp(self.green, 0, 255),
+            clamp(self.blue, 0, 255),
+            clamp(self.alpha, 0, 255),
         )
 
     def __eq__(self, other):
@@ -66,10 +66,10 @@ class Color(object):
     def scale(self, factor):
         return Color(
             (
-                int(clamp(self.red * factor, 0, 255)),
-                int(clamp(self.green * factor, 0, 255)),
-                int(clamp(self.blue * factor, 0, 255)),
-                int(clamp(self.alpha, 0, 255)),
+                clamp(self.red * factor, 0, 255),
+                clamp(self.green * factor, 0, 255),
+                clamp(self.blue * factor, 0, 255),
+                clamp(self.alpha, 0, 255),
             )
         )
 

@@ -115,3 +115,11 @@ def test_color_multiply():
     assert Color((0, 0, 0, 255)) * Color((0, 50, 0, 255)) == Color((0, 0, 0, 255))
     assert Color((0, 0, 0, 255)) * Color((0, 0, 50, 255)) == Color((0, 0, 0, 255))
     assert Color((0, 0, 0, 0)) * Color((0, 0, 0, 50)) == Color((0, 0, 0, 0))
+
+
+@pytest.mark.unit
+def test_color_scale():
+    scaled_color = Color("#ffffff").scale(1.0)
+    assert str(scaled_color) == "#ffffffff"
+    assert Color("#ffffff").scale(1) == Color("#ffffff")
+    assert Color("#ffffff").scale(0) == Color("#000000")
