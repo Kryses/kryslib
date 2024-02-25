@@ -8,3 +8,4 @@ pluggy==1.3.0
 Pygments==2.17.2
 pytest==7.4.3
 six==1.16.0
+qtile
