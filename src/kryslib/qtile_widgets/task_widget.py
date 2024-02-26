@@ -25,8 +25,8 @@ class TaskWidget(base.InLoopPollText, base.PaddingMixin, base.MarginMixin):
             ["timew", "get", "dom.active.json"], capture_output=True, text=True
         )
         task_json = json.loads(task.stdout)
-        task_text = task_json["tags"][-2]
-        task_project = task_json["tags"][-1]
+        task_text = task_json["tags"][-1]
+        task_project = task_json["tags"][-2]
         task_start_time = subprocess.run(
             ["timew", "get", "dom.active.start"], capture_output=True, text=True
         ).stdout
@@ -38,8 +38,8 @@ class TaskWidget(base.InLoopPollText, base.PaddingMixin, base.MarginMixin):
         formatted_time = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
 
         return text_format.format(
-            project=task_project,
-            task_name=self.truncate_string(task_text, 50),
+            project=self.truncate_string(task_project, 20),
+            task_name=self.truncate_string(task_text, 20),
             task_time=formatted_time,
         )
 
