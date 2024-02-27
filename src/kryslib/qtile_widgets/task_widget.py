@@ -25,8 +25,10 @@ class TaskWidget(base.InLoopPollText, base.PaddingMixin, base.MarginMixin):
             ["timew", "get", "dom.active.json"], capture_output=True, text=True
         )
         task_json = json.loads(task.stdout)
-        task_text = task_json["tags"][-1]
-        task_project = task_json["tags"][-2]
+        task_text = [x.split("|")[1] for x in task_json["tags"] if "task|" in x][0]
+        task_project = [x.split("|")[1] for x in task_json["tags"] if "project|" in x][
+            0
+        ]
         task_start_time = subprocess.run(
             ["timew", "get", "dom.active.start"], capture_output=True, text=True
         ).stdout
